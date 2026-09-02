@@ -1,28 +1,18 @@
-// export const Login = function () {
-//   return (
-//     <div className="bg-gray-50 h-screen w-screen flex justify-center items-center ">
-//       <div className="border-2 border-red-500">
-//         <form className="flex flex-col items-center justify-center">
-//           <input
-//             className="text-black outline-none bg-transparent border-2 border-white  text-xl py-4 px-5 rounded-full "
-//             type="email"
-//             placeholder="Enter your email"
-//           />
-//           <input
-//             className=" border-2 border-white  text-xl py-4 px-5 rounded-full "
-//             type="password"
-//             placeholder="Enter your password"
-//           />
-//           <button
-//            className=" border-2 border-emerald-500  text-xl py-4 px-5 rounded-full "
-//           >Log in</button>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
+import { useState } from "react";
 
 export const Login = function () {
+  const [email, setEmail] = useState('');
+const [password, setPassword] = useState('')
+
+
+  const submitHandler = function (e) {
+    e.preventDefault();
+    console.log("email is", email);
+    console.log("password is", password);
+    setEmail("")
+    setPassword("")
+  };
+
   return (
     <div className="min-h-screen w-screen flex items-center justify-center bg-gradient-to-b from-[#f7d7da] via-[#f2e7e1] to-[#e8eadf] relative overflow-hidden">
       <div className="relative w-[380px] h-[315px] bg-white rounded-[48px] shadow-[0_15px_35px_rgba(0,0,0,0.12)] flex items-center justify-center">
@@ -34,16 +24,27 @@ export const Login = function () {
           />
         </div>
 
-        <form className="w-[320px] flex flex-col gap-3 pt-8">
+        <form
+          onSubmit={(e) => {
+            submitHandler(e);
+          }}
+          className="w-[320px] flex flex-col gap-3 pt-8"
+        >
           <div className="relative">
             <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">
               👤
             </span>
 
             <input
+            value={email}
+            onChange={function(e){
+            setEmail(e.target.value)
+            }}
+              required
               id="Email"
               type="email"
               placeholder="Username"
+              autoComplete="username"
               className="
                 h-11
                 w-full
@@ -65,9 +66,15 @@ export const Login = function () {
             </span>
 
             <input
+            value={password}
+            onChange={function(e){
+              setPassword(e.target.value)
+            }}
+            required
               id="password"
               type="password"
               placeholder="***********"
+              autoComplete="current-password"
               className="
                 h-11
                 w-full
