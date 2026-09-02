@@ -1,17 +1,29 @@
-# React + Vite
+# 🏢 Employee Management System (Web Version)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![React Version](https://shields.io)](https://react.dev)
+[![Tailwind CSS](https://shields.io)](https://tailwindcss.com)
+[![Storage](https://shields.io)](https://mozilla.org)
+[![License: MIT](https://shields.io)](https://opensource.org)
 
-Currently, two official plugins are available:
+A lightweight, modern **Employee Management System** built with **React.js** and **Tailwind CSS**. This application requires no backend setup; it uses the browser's **Local Storage API** to persist employee records directly on the client side.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Add Employee:** Quick form to register new employees with their name, role, email, and department.
+- **View Records:** A clean, responsive dashboard displaying all employees in an interactive data table.
+- **Delete Employee:** One-click removal of records from the system.
+- **Persistent Data:** Automatic background syncing with browser local storage to preserve data across page refreshes.
+- **Fully Responsive:** Optimised design utilizing Tailwind utility classes for flawless display on desktop, tablet, and mobile.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# Employee-Management-System
+## 🛠️ Tech Stack
+
+- **Frontend Framework:** React.js (Vite workflow)
+- **Styling:** Tailwind CSS
+- **Data Persistence:** Web Storage API (`localStorage`)
+- **Icons:** Lucide React (or Heroicons)
+
+---
