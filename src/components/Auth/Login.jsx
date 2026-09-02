@@ -20,7 +20,7 @@ const [password, setPassword] = useState('')
           <img
             src="/src/assets/icons8-user.svg"
             alt="User"
-            className="w-[55px] h-[55px]"
+            className="w-[55px] h-13.75"
           />
         </div>
 
