@@ -1,10 +1,11 @@
 
 import "./App.css";
+import { Login } from "./components/Auth/Login";
 
 function App() {
   return(
     <div>
-      <h1 className=" bg-gray-300 ">hello world</h1>
+      <Login></Login>
     </div>
   )
 }
