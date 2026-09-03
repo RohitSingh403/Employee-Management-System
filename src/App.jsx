@@ -1,5 +1,6 @@
 
 import "./App.css";
+import { AdminDashboard } from "./components/Dashboard/AdminDashboard";
 // import { Login } from "./components/Auth/Login";
 // import { EmployeeDashboard } from "./components/Dashboard/EmployeeDashboard";
 // import { Header } from "./components/Sementic/Header";
@@ -9,6 +10,7 @@ function App() {
     <div>
       {/* <Login></Login> */}
       {/* <EmployeeDashboard></EmployeeDashboard> */}
+      <AdminDashboard></AdminDashboard>
     </div>
   )
 }

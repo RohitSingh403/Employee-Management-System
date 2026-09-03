@@ -15,7 +15,7 @@
 export const Header = function () {
   return (
     <header className="w-full px-6 ">
-      <div className="h-28 w-full rounded-b-[45px] bg-gradient-to-r from-[#f7d7da] via-[#f2e7e1] to-[#e8eadf] flex items-center justify-between px-16">
+      <div className="h-28 w-full rounded-b-[45px] border-[2px] border-white bg-gradient-to-r from-[#f7d7da] via-[#f2e7e1] to-[#e8eadf] flex items-center justify-between px-16">
         {/* Left Section */}
         <div className="flex flex-col justify-center">
           <h4 className="text-[22px] font-light text-[#555555]">Hello</h4>
