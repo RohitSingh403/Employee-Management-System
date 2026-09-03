@@ -1,6 +1,6 @@
 export const CreateTask = function () {
   return (
-    <div className=" h-140 w-248 border-[2px] border-white rounded-3xl mt-5 pl-10 ml-10 flex flex-col mb-10  ">
+    <div className="bg-black text-white h-140 w-248 border-[2px] border-white rounded-3xl mt-5 pl-10 ml-10 flex flex-col mb-10  ">
       <h1 className="text-4xl mb-7 pt-6">Create Task 📝</h1>
 
       <form>
