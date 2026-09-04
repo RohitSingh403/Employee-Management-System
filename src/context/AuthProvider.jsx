@@ -1,34 +1,50 @@
 import { useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
+import { employees } from "../utils/employees";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  // Check previously logged-in user
   useEffect(() => {
-    const loggedInUser = localStorage.getItem("loggedInUser");
+    try {
+      const loggedInUser = localStorage.getItem("loggedInUser");
 
-    if (loggedInUser) {
-      setUser(JSON.parse(loggedInUser));
+      if (loggedInUser) {
+        setUser(JSON.parse(loggedInUser));
+      }
+    } catch (error) {
+      console.error("Failed to restore login session:", error);
+      localStorage.removeItem("loggedInUser");
     }
   }, []);
 
   const login = (email, password) => {
     let loggedInUser = null;
 
-    if (email === "admin@example.com" && password === "123") {
+    if (
+      email === "admin@example.com" &&
+      password === "123"
+    ) {
       loggedInUser = {
+        id: "admin",
         role: "admin",
-        email: email,
+        email,
         name: "Admin",
       };
     }
 
-    if (email === "employee@example.com" && password === "123") {
+    const employee = employees.find(
+      (item) =>
+        item.email === email &&
+        item.password === password
+    );
+
+    if (employee) {
       loggedInUser = {
-        role: "employee",
-        email: email,
-        name: "Employee",
+        id: employee.id,
+        role: employee.role,
+        email: employee.email,
+        name: employee.name,
       };
     }
 

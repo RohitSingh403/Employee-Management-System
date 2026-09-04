@@ -13,12 +13,10 @@ const TaskProvider = ({ children }) => {
     }
   });
 
-  // Persist tasks whenever they change
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
-  // Create task
   const createTask = (taskData) => {
     const newTask = {
       id: crypto.randomUUID(),
@@ -35,7 +33,20 @@ const TaskProvider = ({ children }) => {
     return newTask;
   };
 
-  // Update task status
+  const updateTask = (taskId, updatedTaskData) => {
+    setTasks((previousTasks) =>
+      previousTasks.map((task) =>
+        task.id === taskId
+          ? {
+              ...task,
+              ...updatedTaskData,
+              updatedAt: new Date().toISOString(),
+            }
+          : task
+      )
+    );
+  };
+
   const updateTaskStatus = (taskId, status) => {
     setTasks((previousTasks) =>
       previousTasks.map((task) =>
@@ -49,7 +60,6 @@ const TaskProvider = ({ children }) => {
     );
   };
 
-  // Delete task
   const deleteTask = (taskId) => {
     setTasks((previousTasks) =>
       previousTasks.filter((task) => task.id !== taskId)
@@ -61,6 +71,7 @@ const TaskProvider = ({ children }) => {
       value={{
         tasks,
         createTask,
+        updateTask,
         updateTaskStatus,
         deleteTask,
       }}
