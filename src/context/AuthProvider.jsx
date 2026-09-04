@@ -1,4 +1,4 @@
-export const AuthContext = function({children}){
+export const AuthProvider = function({children}){
     return(
         <div>
             {children}
