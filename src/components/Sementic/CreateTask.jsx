@@ -1,39 +1,144 @@
-export const CreateTask = function () {
+import { useState } from "react";
+
+export const CreateTask = () => {
+  const [taskTitle, setTaskTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [date, setDate] = useState("");
+  const [assignTo, setAssignTo] = useState("");
+  const [category, setCategory] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log({
+      taskTitle,
+      description,
+      date,
+      assignTo,
+      category,
+    });
+  };
+
   return (
-    <div className="bg-black text-white h-140 w-248 border-[2px] border-white rounded-3xl mt-5 pl-10 ml-10 flex flex-col mb-10  ">
-      <h1 className="text-4xl mb-7 pt-6">Create Task 📝</h1>
+    <div className="w-full">
+      <form onSubmit={handleSubmit} className="space-y-5">
 
-      <form>
-        <h3 className="text-2xl font-bold">Task Title</h3>
-        <input
-          className="mt-1 border rounded-xl p-2 w-[80%] "
-          type="text"
-          placeholder="Make a UI design"
-        />
-        <h3 className="text-2xl font-bold">Description</h3>
-        <textarea
-          className="border mt-1 border rounded-xl p-2 w-[80%]"
-          name=""
-          id=""
-        ></textarea>
-        <h3 className="text-2xl font-bold">Date</h3>
-        <input className="mt-1 border rounded-xl p-2 w-[80%]" type="date" />
-        <h3 className="text-2xl font-bold">Assign To</h3>
-        <input
-          className="mt-1 border rounded-xl p-2 w-[80%]"
-          type="text"
-          placeholder="employee name"
-        />
+        {/* Task Title */}
+        <div>
+          <label
+            htmlFor="taskTitle"
+            className="mb-2 block text-sm font-semibold text-[#444444]"
+          >
+            Task Title
+          </label>
 
-        <h3 className="text-2xl font-bold">Category</h3>
-        <input
-          className="mt-1 border rounded-xl p-2 w-[80%]"
-          type="text"
-          placeholder="Design, Dev, etc"
-        />
-        <button className=" ml-10 cursor-pointer border p-2 text-white rounded-xl bg-[#ff003d]">
-          Create Task
-        </button>
+          <input
+            id="taskTitle"
+            type="text"
+            value={taskTitle}
+            onChange={(e) => setTaskTitle(e.target.value)}
+            placeholder="e.g. Design landing page"
+            className="h-12 w-full rounded-2xl border border-[#e5e0dc] bg-[#faf9f8] px-4 text-sm text-[#333333] outline-none transition placeholder:text-[#aaa] focus:border-[#ff003d] focus:bg-white focus:ring-4 focus:ring-[#ff003d]/10"
+            required
+          />
+        </div>
+
+        {/* Description */}
+        <div>
+          <label
+            htmlFor="description"
+            className="mb-2 block text-sm font-semibold text-[#444444]"
+          >
+            Description
+          </label>
+
+          <textarea
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Describe what needs to be done..."
+            rows="4"
+            className="w-full resize-none rounded-2xl border border-[#e5e0dc] bg-[#faf9f8] px-4 py-3 text-sm text-[#333333] outline-none transition placeholder:text-[#aaa] focus:border-[#ff003d] focus:bg-white focus:ring-4 focus:ring-[#ff003d]/10"
+            required
+          />
+        </div>
+
+        {/* Date */}
+        <div>
+          <label
+            htmlFor="date"
+            className="mb-2 block text-sm font-semibold text-[#444444]"
+          >
+            Due Date
+          </label>
+
+          <input
+            id="date"
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            className="h-12 w-full rounded-2xl border border-[#e5e0dc] bg-[#faf9f8] px-4 text-sm text-[#555555] outline-none transition focus:border-[#ff003d] focus:bg-white focus:ring-4 focus:ring-[#ff003d]/10"
+            required
+          />
+        </div>
+
+        {/* Assign To */}
+        <div>
+          <label
+            htmlFor="assignTo"
+            className="mb-2 block text-sm font-semibold text-[#444444]"
+          >
+            Assign To
+          </label>
+
+          <select
+            id="assignTo"
+            value={assignTo}
+            onChange={(e) => setAssignTo(e.target.value)}
+            className="h-12 w-full rounded-2xl border border-[#e5e0dc] bg-[#faf9f8] px-4 text-sm text-[#555555] outline-none transition focus:border-[#ff003d] focus:bg-white focus:ring-4 focus:ring-[#ff003d]/10"
+            required
+          >
+            <option value="">Select employee</option>
+            <option value="employee">Employee</option>
+          </select>
+        </div>
+
+        {/* Category */}
+        <div>
+          <label
+            htmlFor="category"
+            className="mb-2 block text-sm font-semibold text-[#444444]"
+          >
+            Category
+          </label>
+
+          <select
+            id="category"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="h-12 w-full rounded-2xl border border-[#e5e0dc] bg-[#faf9f8] px-4 text-sm text-[#555555] outline-none transition focus:border-[#ff003d] focus:bg-white focus:ring-4 focus:ring-[#ff003d]/10"
+            required
+          >
+            <option value="">Select category</option>
+            <option value="design">Design</option>
+            <option value="development">Development</option>
+            <option value="testing">Testing</option>
+            <option value="research">Research</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        {/* Submit */}
+        <div className="pt-2">
+          <button
+            type="submit"
+            className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#ff003d] text-sm font-semibold text-white shadow-lg shadow-[#ff003d]/20 transition duration-200 hover:-translate-y-0.5 hover:bg-[#e90037] hover:shadow-xl active:translate-y-0"
+          >
+            <span className="text-lg">+</span>
+            Create Task
+          </button>
+        </div>
+
       </form>
     </div>
   );
