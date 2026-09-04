@@ -1,28 +1,42 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { TaskContext } from "../../context/TaskContext";
 
 export const CreateTask = () => {
+  const { createTask } = useContext(TaskContext);
+
   const [taskTitle, setTaskTitle] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
   const [assignTo, setAssignTo] = useState("");
   const [category, setCategory] = useState("");
+  const [priority, setPriority] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log({
-      taskTitle,
-      description,
+    createTask({
+      title: taskTitle.trim(),
+      description: description.trim(),
       date,
       assignTo,
       category,
+      priority,
     });
+
+    // Clear form
+    setTaskTitle("");
+    setDescription("");
+    setDate("");
+    setAssignTo("");
+    setCategory("");
+    setPriority("");
+
+    alert("Task created successfully!");
   };
 
   return (
     <div className="w-full">
       <form onSubmit={handleSubmit} className="space-y-5">
-
         {/* Task Title */}
         <div>
           <label
@@ -99,7 +113,10 @@ export const CreateTask = () => {
             required
           >
             <option value="">Select employee</option>
-            <option value="employee">Employee</option>
+
+            <option value="employee@example.com">
+              Employee
+            </option>
           </select>
         </div>
 
@@ -120,11 +137,34 @@ export const CreateTask = () => {
             required
           >
             <option value="">Select category</option>
-            <option value="design">Design</option>
-            <option value="development">Development</option>
-            <option value="testing">Testing</option>
-            <option value="research">Research</option>
-            <option value="other">Other</option>
+            <option value="Design">Design</option>
+            <option value="Development">Development</option>
+            <option value="Testing">Testing</option>
+            <option value="Research">Research</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        {/* Priority */}
+        <div>
+          <label
+            htmlFor="priority"
+            className="mb-2 block text-sm font-semibold text-[#444444]"
+          >
+            Priority
+          </label>
+
+          <select
+            id="priority"
+            value={priority}
+            onChange={(e) => setPriority(e.target.value)}
+            className="h-12 w-full rounded-2xl border border-[#e5e0dc] bg-[#faf9f8] px-4 text-sm text-[#555555] outline-none transition focus:border-[#ff003d] focus:bg-white focus:ring-4 focus:ring-[#ff003d]/10"
+            required
+          >
+            <option value="">Select priority</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
           </select>
         </div>
 
@@ -138,7 +178,6 @@ export const CreateTask = () => {
             Create Task
           </button>
         </div>
-
       </form>
     </div>
   );

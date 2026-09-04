@@ -1,51 +1,22 @@
-const tasks = [
-  {
-    id: 1,
-    title: "Design Landing Page",
-    employee: "Employee",
-    category: "Design",
-    date: "Sep 04, 2026",
-    status: "New",
-  },
-  {
-    id: 2,
-    title: "Build Authentication",
-    employee: "Employee",
-    category: "Development",
-    date: "Sep 05, 2026",
-    status: "Accepted",
-  },
-  {
-    id: 3,
-    title: "API Integration",
-    employee: "Employee",
-    category: "Development",
-    date: "Sep 06, 2026",
-    status: "Completed",
-  },
-  {
-    id: 4,
-    title: "Test Dashboard",
-    employee: "Employee",
-    category: "Testing",
-    date: "Sep 07, 2026",
-    status: "Failed",
-  },
-];
+import { useContext } from "react";
+import { TaskContext } from "../../context/TaskContext";
 
 const statusStyles = {
   New: {
     badge: "bg-[#e8f8ff] text-[#2998c9]",
     dot: "bg-[#4CC9FE]",
   },
+
   Accepted: {
     badge: "bg-[#fff8df] text-[#a47c00]",
     dot: "bg-[#FFD369]",
   },
+
   Completed: {
     badge: "bg-[#edf9ec] text-[#5c9a59]",
     dot: "bg-[#9EDF9C]",
   },
+
   Failed: {
     badge: "bg-[#fff0f3] text-[#ff003d]",
     dot: "bg-[#ff003d]",
@@ -53,41 +24,70 @@ const statusStyles = {
 };
 
 export const AllTask = () => {
+  const { tasks, deleteTask } = useContext(TaskContext);
+
+  const handleDelete = (taskId) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this task?"
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    deleteTask(taskId);
+  };
+
+  if (tasks.length === 0) {
+    return (
+      <div className="rounded-3xl border border-dashed border-[#ddd7d3] bg-[#faf9f8] px-6 py-12 text-center">
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f3f1ef] text-xl">
+          ✓
+        </div>
+
+        <h3 className="mt-4 text-lg font-semibold text-[#333333]">
+          No tasks yet
+        </h3>
+
+        <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-[#888888]">
+          Create your first task using the form on the left.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full">
-
-      {/* Desktop Header */}
-      <div className="hidden grid-cols-[1.5fr_1fr_0.9fr_0.9fr_0.8fr] gap-4 border-b border-[#eeeae7] px-4 pb-4 text-xs font-semibold uppercase tracking-wider text-[#999999] md:grid">
+      {/* Desktop header */}
+      <div className="hidden grid-cols-[1.5fr_1fr_0.9fr_0.9fr_0.8fr_auto] gap-4 border-b border-[#eeeae7] px-4 pb-4 text-xs font-semibold uppercase tracking-wider text-[#999999] lg:grid">
         <span>Task</span>
         <span>Assigned To</span>
         <span>Category</span>
         <span>Due Date</span>
         <span>Status</span>
+        <span>Action</span>
       </div>
 
-      {/* Task List */}
       <div className="mt-3 space-y-3">
-
         {tasks.map((task) => {
-          const style = statusStyles[task.status];
+          const style =
+            statusStyles[task.status] || statusStyles.New;
 
           return (
             <div
               key={task.id}
               className="rounded-2xl border border-[#eeeae7] bg-[#faf9f8] p-4 transition duration-200 hover:border-[#e4deda] hover:bg-white hover:shadow-sm"
             >
-
               {/* Desktop */}
-              <div className="hidden grid-cols-[1.5fr_1fr_0.9fr_0.9fr_0.8fr] items-center gap-4 md:grid">
-
+              <div className="hidden grid-cols-[1.5fr_1fr_0.9fr_0.9fr_0.8fr_auto] items-center gap-4 lg:grid">
                 {/* Task */}
                 <div className="min-w-0">
                   <h4 className="truncate text-sm font-semibold text-[#333333]">
                     {task.title}
                   </h4>
 
-                  <p className="mt-1 text-xs text-[#999999]">
-                    Task #{task.id}
+                  <p className="mt-1 truncate text-xs text-[#999999]">
+                    {task.description}
                   </p>
                 </div>
 
@@ -97,8 +97,10 @@ export const AllTask = () => {
                     E
                   </div>
 
-                  <span className="text-sm text-[#555555]">
-                    {task.employee}
+                  <span className="truncate text-sm text-[#555555]">
+                    {task.assignTo === "employee@example.com"
+                      ? "Employee"
+                      : task.assignTo}
                   </span>
                 </div>
 
@@ -127,20 +129,27 @@ export const AllTask = () => {
                   </span>
                 </div>
 
+                {/* Delete */}
+                <button
+                  type="button"
+                  onClick={() => handleDelete(task.id)}
+                  className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#eee0e2] bg-white text-sm text-[#ff003d] transition hover:bg-[#fff0f3]"
+                  title="Delete task"
+                >
+                  🗑
+                </button>
               </div>
 
-              {/* Mobile */}
-              <div className="md:hidden">
-
-                <div className="mb-4 flex items-start justify-between gap-3">
-
-                  <div>
+              {/* Mobile / Tablet */}
+              <div className="lg:hidden">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
                     <h4 className="text-sm font-semibold text-[#333333]">
                       {task.title}
                     </h4>
 
-                    <p className="mt-1 text-xs text-[#999999]">
-                      Task #{task.id}
+                    <p className="mt-1 text-xs leading-5 text-[#999999]">
+                      {task.description}
                     </p>
                   </div>
 
@@ -153,23 +162,23 @@ export const AllTask = () => {
 
                     {task.status}
                   </span>
-
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
-
+                <div className="mt-5 grid grid-cols-2 gap-4 border-t border-[#eeeae7] pt-4">
                   <div>
-                    <p className="text-[11px] uppercase tracking-wider text-[#aaa]">
+                    <p className="text-[10px] uppercase tracking-wider text-[#aaaaaa]">
                       Assigned To
                     </p>
 
                     <p className="mt-1 text-sm text-[#555555]">
-                      {task.employee}
+                      {task.assignTo === "employee@example.com"
+                        ? "Employee"
+                        : task.assignTo}
                     </p>
                   </div>
 
                   <div>
-                    <p className="text-[11px] uppercase tracking-wider text-[#aaa]">
+                    <p className="text-[10px] uppercase tracking-wider text-[#aaaaaa]">
                       Category
                     </p>
 
@@ -179,7 +188,7 @@ export const AllTask = () => {
                   </div>
 
                   <div>
-                    <p className="text-[11px] uppercase tracking-wider text-[#aaa]">
+                    <p className="text-[10px] uppercase tracking-wider text-[#aaaaaa]">
                       Due Date
                     </p>
 
@@ -188,16 +197,29 @@ export const AllTask = () => {
                     </p>
                   </div>
 
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wider text-[#aaaaaa]">
+                      Priority
+                    </p>
+
+                    <p className="mt-1 text-sm text-[#555555]">
+                      {task.priority}
+                    </p>
+                  </div>
                 </div>
 
+                <button
+                  type="button"
+                  onClick={() => handleDelete(task.id)}
+                  className="mt-5 h-10 w-full rounded-xl border border-[#eee0e2] bg-white text-xs font-semibold text-[#ff003d] transition hover:bg-[#fff0f3]"
+                >
+                  Delete Task
+                </button>
               </div>
-
             </div>
           );
         })}
-
       </div>
-
     </div>
   );
 };
