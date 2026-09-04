@@ -1,16 +1,15 @@
 import { useState } from "react";
 
-export const Login = function () {
-  const [email, setEmail] = useState('');
-const [password, setPassword] = useState('')
-
+export const Login = function ({ handleLogin }) {
+  // console.log(handleLogin)
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const submitHandler = function (e) {
     e.preventDefault();
-    console.log("email is", email);
-    console.log("password is", password);
-    setEmail("")
-    setPassword("")
+    handleLogin(email, password);
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -36,10 +35,10 @@ const [password, setPassword] = useState('')
             </span>
 
             <input
-            value={email}
-            onChange={function(e){
-            setEmail(e.target.value)
-            }}
+              value={email}
+              onChange={function (e) {
+                setEmail(e.target.value);
+              }}
               required
               id="Email"
               type="email"
@@ -66,11 +65,11 @@ const [password, setPassword] = useState('')
             </span>
 
             <input
-            value={password}
-            onChange={function(e){
-              setPassword(e.target.value)
-            }}
-            required
+              value={password}
+              onChange={function (e) {
+                setPassword(e.target.value);
+              }}
+              required
               id="password"
               type="password"
               placeholder="***********"
