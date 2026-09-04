@@ -1,29 +1,78 @@
-# 🏢 Employee Management System (Web Version)
+# Employee Management System
 
-[![React Version](https://shields.io)](https://react.dev)
-[![Tailwind CSS](https://shields.io)](https://tailwindcss.com)
-[![Storage](https://shields.io)](https://mozilla.org)
-[![License: MIT](https://shields.io)](https://opensource.org)
+A responsive Employee Management System built with React and Tailwind CSS. The application provides separate workflows for Admins and Employees, allowing administrators to create, manage, search, filter, edit, and delete tasks while employees can view and update the status of their assigned tasks.
 
-A lightweight, modern **Employee Management System** built with **React.js** and **Tailwind CSS**. This application requires no backend setup; it uses the browser's **Local Storage API** to persist employee records directly on the client side.
+## 🚀 Live Demo
+
+[Add your Vercel deployment link here]
+
+## 📂 GitHub Repository
+
+https://github.com/RohitSingh403/Employee-Management-System
 
 ---
 
 ## ✨ Features
 
-- **Add Employee:** Quick form to register new employees with their name, role, email, and department.
-- **View Records:** A clean, responsive dashboard displaying all employees in an interactive data table.
-- **Delete Employee:** One-click removal of records from the system.
-- **Persistent Data:** Automatic background syncing with browser local storage to preserve data across page refreshes.
-- **Fully Responsive:** Optimised design utilizing Tailwind utility classes for flawless display on desktop, tablet, and mobile.
+### 🔐 Authentication
 
----
+- Admin login
+- Employee login
+- Role-based dashboard rendering
+- Persistent login using `localStorage`
+- Logout functionality
+- Login session restoration after page refresh
+- Demo credentials for testing
 
-## 🛠️ Tech Stack
+### 👨‍💼 Admin Dashboard
 
-- **Frontend Framework:** React.js (Vite workflow)
-- **Styling:** Tailwind CSS
-- **Data Persistence:** Web Storage API (`localStorage`)
-- **Icons:** Lucide React (or Heroicons)
+Administrators can:
 
----
+- View overall task statistics
+- Create new tasks
+- Assign tasks to employees
+- View all tasks
+- Search tasks
+- Filter tasks by:
+  - Status
+  - Priority
+  - Category
+  - Employee
+- Edit existing tasks
+- Delete tasks
+- Monitor task progress
+- View total, new, accepted, completed and failed task counts
+
+### 👨‍💻 Employee Dashboard
+
+Employees can:
+
+- View their assigned tasks
+- View task statistics
+- Accept new tasks
+- Mark accepted tasks as completed
+- Mark tasks as failed
+- View completed and failed tasks
+- Access only tasks assigned to their account
+
+### 📋 Task Management
+
+Each task contains:
+
+- Task title
+- Description
+- Due date
+- Assigned employee
+- Category
+- Priority
+- Status
+- Creation timestamp
+- Updated timestamp
+
+Supported task statuses:
+
+```text
+New
+Accepted
+Completed
+Failed
