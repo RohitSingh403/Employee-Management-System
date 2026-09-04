@@ -1,131 +1,89 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
-export const Login = function ({ handleLogin }) {
-  // console.log(handleLogin)
+export const Login = () => {
+  const { login } = useContext(AuthContext);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const submitHandler = function (e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin(email, password);
+
+    const result = login(email, password);
+
+    if (!result.success) {
+      alert(result.message);
+      return;
+    }
+
     setEmail("");
     setPassword("");
   };
 
   return (
-    <div className="min-h-screen w-screen flex items-center justify-center bg-gradient-to-b from-[#f7d7da] via-[#f2e7e1] to-[#e8eadf] relative overflow-hidden">
-      <div className="relative w-[380px] h-[315px] bg-white rounded-[48px] shadow-[0_15px_35px_rgba(0,0,0,0.12)] flex items-center justify-center">
-        <div className="absolute -top-[50px] left-1/2 -translate-x-1/2 w-[100px] h-[100px] rounded-full bg-[#ff003d] flex items-center justify-center shadow-[0_10px_20px_rgba(0,0,0,0.18)]">
-          <img
-            src="/src/assets/icons8-user.svg"
-            alt="User"
-            className="w-[55px] h-13.75"
-          />
+    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-b from-[#f7d7da] via-[#f2e7e1] to-[#e8eadf] px-4">
+
+      <div className="w-full max-w-md rounded-[32px] bg-white p-8 shadow-xl">
+
+        {/* Icon */}
+        <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#ff003d] text-3xl text-white shadow-lg">
+          👤
         </div>
 
-        <form
-          onSubmit={(e) => {
-            submitHandler(e);
-          }}
-          className="w-[320px] flex flex-col gap-3 pt-8"
-        >
-          <div className="relative">
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">
-              👤
-            </span>
+        {/* Heading */}
+        <div className="mb-8 text-center">
+          <h1 className="text-3xl font-semibold text-[#333333]">
+            Welcome Back
+          </h1>
 
-            <input
-              value={email}
-              onChange={function (e) {
-                setEmail(e.target.value);
-              }}
-              required
-              id="Email"
-              type="email"
-              placeholder="Username"
-              autoComplete="username"
-              className="
-                h-11
-                w-full
-                rounded-full
-                bg-[#e5e5e5]
-                border-none
-                outline-none
-                px-12
-                text-sm
-                text-gray-700
-                placeholder:text-gray-400
-              "
-            />
-          </div>
+          <p className="mt-2 text-sm text-gray-500">
+            Login to your account
+          </p>
+        </div>
 
-          <div className="relative">
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">
-              🔒
-            </span>
+        <form onSubmit={handleSubmit} className="space-y-5">
 
-            <input
-              value={password}
-              onChange={function (e) {
-                setPassword(e.target.value);
-              }}
-              required
-              id="password"
-              type="password"
-              placeholder="***********"
-              autoComplete="current-password"
-              className="
-                h-11
-                w-full
-                rounded-full
-                bg-[#e5e5e5]
-                border-none
-                outline-none
-                px-12
-                text-sm
-                text-gray-700
-                placeholder:text-gray-400
-              "
-            />
-          </div>
-
-          <div className="flex items-center justify-between px-3 mt-1">
-            <label className="flex items-center gap-2 text-[11px] text-gray-400">
-              <input
-                type="checkbox"
-                defaultChecked
-                className="w-3 h-3 accent-gray-500"
-              />
-              Remember me
+          {/* Email */}
+          <div>
+            <label className="mb-2 block text-sm font-medium text-gray-600">
+              Email
             </label>
 
-            <button
-              type="button"
-              className="text-[11px] italic text-gray-300 hover:text-gray-400"
-            >
-              Forgot Password?
-            </button>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              required
+              className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 outline-none transition focus:border-[#ff003d] focus:ring-2 focus:ring-[#ff003d]/10"
+            />
           </div>
 
+          {/* Password */}
+          <div>
+            <label className="mb-2 block text-sm font-medium text-gray-600">
+              Password
+            </label>
+
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              required
+              className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 outline-none transition focus:border-[#ff003d] focus:ring-2 focus:ring-[#ff003d]/10"
+            />
+          </div>
+
+          {/* Login */}
           <button
             type="submit"
-            className="
-              mt-2
-              h-11
-              w-full
-              rounded-full
-              bg-[#ff003d]
-              text-white
-              text-sm
-              font-medium
-              tracking-[1px]
-              hover:bg-[#e90037]
-              transition-colors
-              duration-200
-            "
+            className="w-full rounded-xl bg-[#ff003d] py-3 font-medium text-white transition hover:bg-[#e90037] active:scale-[0.98]"
           >
-            LOGIN
+            Login
           </button>
+
         </form>
       </div>
     </div>
